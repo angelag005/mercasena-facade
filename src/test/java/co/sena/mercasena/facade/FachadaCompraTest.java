@@ -59,4 +59,27 @@ class FachadaCompraTest {
     void compraVacia() {
         assertThrows(IllegalArgumentException.class, () -> fachada.comprar("Laura", List.of(), "TARJETA"));
     }
+
+    @Test
+    void pagoRechazadoDebeLiberarInventario() {
+        //Regla 4: Si el pago es rechazado, la compra falla con el motivo `PAGO_RECHAZADO`, **se libera todo el inventario reservado** y **no** se emite factura.
+        // En @BeforeEach agregamos 10 unidades de CAFE. Si reservamos 2 y el pago falla, deben volver a ser 10.
+        ResultadoCompra r = fachada.comprar("Laura",
+                List.of(new LineaCompra("CAFE", 2, new BigDecimal("18000"))),
+                "TARJETA_RECHAZADA");
+
+        assertFalse(r.exitosa());
+        assertEquals(10, inventario.disponible("CAFE"), "El stock de CAFE debe liberarse si el pago es rechazado");
+    }
+
+    @Test
+    void pagoRechazadoNoDebeNotificarAlCliente() {
+        // Regla 5: Solo se notifica al cliente cuando la compra fue exitosa**, es decir, después de cobrar y facturar. Nunca se envía "Compra confirmada" si el pago falló.
+        ResultadoCompra r = fachada.comprar("Laura",
+                List.of(new LineaCompra("CAFE", 1, new BigDecimal("18000"))),
+                "TARJETA_RECHAZADA");
+
+        assertFalse(r.exitosa());
+        assertTrue(notificador.getEnviados().isEmpty(), "No se debe notificar al cliente si el pago fue rechazado");
+    }
 }
