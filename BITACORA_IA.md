@@ -1,6 +1,6 @@
 # Bitácora de uso de IA — Patrón Facade
 
-Aprendices: ______________________ / ______________________
+Aprendices: Angela Maria Garces Mosquera
 Ficha: ________  Fecha de inicio: ________
 
 > La bitácora es evidencia del ítem 18 de la lista de chequeo. Regístralo **todo**, también las respuestas de la IA que estaban mal.
@@ -10,37 +10,37 @@ Ficha: ________  Fecha de inicio: ________
 
 Antes de abrir cualquier IA, lee el README y el código. Escribe aquí qué errores crees que hay y por qué.
 
-| # | Archivo y línea | ¿Qué creo que está mal? | ¿Qué regla de negocio rompe? |
-|---|---|---|---|
-| 1 | | | |
-| 2 | | | |
-| 3 | | | |
+| # | Archivo y línea     | ¿Qué creo que está mal?                                                                                                 | ¿Qué regla de negocio rompe? |
+|---|---------------------|-------------------------------------------------------------------------------------------------------------------------|------------------------------|
+| 1 | FachadaCompra 26-28 | Unicamente se suma el precioUnitario de cada línea,pero el total es la suma de precio unitario × cantidad de cada línea | Regla 1                      |
+| 2 | FachadaCompra 41    | Se envia el mensaje antes de cobrar                                                                                     | Regla 2 y 5                  |
+| 3 | FachadaCompra 42-44 | Retorna "PAGO_RECHAZADO" sin llamar al metodo liberar, por lo que el stock queda bloqueado                              | Regla 4                      |
 
 ## 2. Registro de interacciones con IA
 
 Copia una fila por cada consulta importante.
 
-| # | Herramienta (ChatGPT / Gemini / DeepSeek / Copilot / otra) | Prompt (resumen o enlace) | ¿Qué respondió? | ¿Era correcto? ¿Cómo lo verifiqué? | ¿Lo usé? (sí / no / modificado) |
-|---|---|---|---|---|---|
-| 1 | | | | | |
-| 2 | | | | | |
-| 3 | | | | | |
+| # | Herramienta (ChatGPT / Gemini / DeepSeek / Copilot / otra) | Prompt (resumen o enlace)                                      | ¿Qué respondió?                                                                                                     | ¿Era correcto? ¿Cómo lo verifiqué? | ¿Lo usé? (sí / no / modificado)                              |
+|---|------------------------------------------------------------|----------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------|------------------------------------|--------------------------------------------------------------|
+| 1 | Gemini                                                     | https://share.gemini.google/a22s3S8dcKX3                       | Cual eran los problemas la clase o el metodo donde se encontraban, que regla afectaba y propuestas de pruba JUnit 5 |                                    | Si, para confirmar mi observacion en encontrar los problemas | 
+| 2 |                                                      |  |                                                                                                                     |                                    |                                                              |
+| 3 |                                                            |                                                                |                                                                                                                     |                                    |                                                              |
 
 ## 3. Jurado de IAs
 
 Envía el **mismo prompt** a tres herramientas distintas y compara.
 
 | Pregunta enviada | ChatGPT | Gemini | DeepSeek | ¿Quién acertó? ¿En qué discreparon? |
-|---|---|---|---|---|
-| | | | | |
+|------------------|---------|--------|----------|-------------------------------------|
+|                  |         |        |          |                                     |
 
 ## 4. Errores encontrados y corregidos
 
 | # | Error | Prueba que lo demuestra (nombre del método de prueba) | Commit de la corrección | ¿Lo encontré yo, la IA o ambos? |
-|---|---|---|---|---|
-| 1 | | | | |
-| 2 | | | | |
-| 3 | | | | |
+|---|-------|-------------------------------------------------------|-------------------------|---------------------------------|
+| 1 |       |                                                       |                         |                                 |
+| 2 |       |                                                       |                         |                                 |
+| 3 |       |                                                       |                         |                                 |
 
 ## 5. Lo que la IA hizo mal o no vio
 

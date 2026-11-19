@@ -24,7 +24,7 @@ public class FachadaCompra {
             throw new IllegalArgumentException("La compra debe tener al menos una línea");
         }
         BigDecimal total = lineas.stream()
-                .map(LineaCompra::precioUnitario)
+                .map(l -> l.precioUnitario().multiply(BigDecimal.valueOf(l.cantidad())))
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
         List<LineaCompra> reservadas = new ArrayList<>();
@@ -38,12 +38,15 @@ public class FachadaCompra {
             return new ResultadoCompra(false, null, total, "SIN_STOCK");
         }
 
-        notificador.enviar(cliente, "Compra confirmada");
         if (!pagos.cobrar(medioPago, total)) {
+            liberar(reservadas);
             return new ResultadoCompra(false, null, total, "PAGO_RECHAZADO");
         }
 
         String factura = facturacion.emitir(cliente, total);
+
+        notificador.enviar(cliente, "Compra confirmada");
+
         return new ResultadoCompra(true, factura, total, null);
     }
 
